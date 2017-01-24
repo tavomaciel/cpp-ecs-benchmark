@@ -1,0 +1,2 @@
+c++ -O3 -std=c++11 kult.cpp -o bin/kult
+Makefile:11: recipe for target 'kult' failed
