@@ -37,7 +37,7 @@ on the test.
     for the traversal, or the starting point.
 
     O(n²) traversal example:
-    ```c++
+```c++
     es.each<Position, Health>([&es, dt](Entity entity, Position &position, Health &health) {
         es.each<Position, Health>([dt, &position](Entity entity2, Position &position2, Health &health2){
             if(is_close(position, position2, 10.0f)) {
@@ -45,11 +45,11 @@ on the test.
             }
         });
     });
-    ```
+```
 - Kult:
     After a join you get a set, you can get the begin and end iterators yourself and do something like this:
 
-    ```c++
+```c++
     auto entities = join(position, health);
     for(auto it = entities.begin(), end = entities.end(); it != end; ++it) {
         auto &entity1 = (*it);
@@ -63,11 +63,12 @@ on the test.
             }
         }
     }
-    ```**
+```
+
 - Anax:
     While a little more verbose, it doesn't hide its implementation under any iterator. You know exactly what your system will process, and it's available under a vector.
     O(n²) traversal example:
-    ```c++
+```c++
     auto entities = getEntities();
     for(int i = 0, s = entities.size(); i < s; ++i) {
         for(int j = i+1; j < s; ++j) {
@@ -83,17 +84,19 @@ on the test.
             }
         }
     }
-    ```
+```
 
 # Finding entities with given components outside of systems.
 If you ever have to find which entities have Components A and B, then:
 
 - Entity-X has got you covered:
+
 ```cpp
 ex.entities.each<Health>([&removed](Entity e, Health &health) {
     doLogic(e, health);
 });
 ```
+
 I've found this to neither be faster or slower than using systems in entityX
 
 - Anax on the other hand do not. But this is not that bad.
